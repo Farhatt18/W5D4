@@ -16,10 +16,14 @@ class Course < ApplicationRecord
     foreign_key: :course_id,
     class_name: :Enrollment
 
-    # has_many :enrollments,
-    # through: :
 
+    has_many :enrolled_courses,
+    through: :enrollments,
+    source: :student
 
-
-
+    belongs_to :prerequisite,
+    primary_key: :id,
+    foreign_key: :prereq_id,
+    class_name: :Course,
+    optional: true   #suppresses presence: true validation
 end
